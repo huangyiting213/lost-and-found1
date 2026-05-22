@@ -24,26 +24,26 @@
                 <div class="col-md-6 col-lg-5">
                     <div class="card shadow-sm border-0">
                         <div class="card-body p-4 p-md-5">
-                            <h2 class="text-center mb-4">Welcome Back</h2>
+                           <h2 class="text-center mb-4" data-i18n="login.title">Welcome Back</h2>
                             
                             <div id="alertBox" class="alert d-none" role="alert"></div>
                             
                             <form id="loginForm">
                                 <div class="mb-3">
-                                    <label class="form-label">Email</label>
+                                    <label class="form-label" data-i18n="login.email">Email</label>
                                     <input type="email" class="form-control" id="email" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Password</label>
+                                    <label class="form-label" data-i18n="login.password">Password</label>
                                     <input type="password" class="form-control" id="password" required>
                                 </div>
-                                <button type="submit" class="btn btn-primary w-100 btn-lg" id="loginBtn">
-                                    Login
+                                <button type="submit" class="btn btn-primary w-100 btn-lg" id="loginBtn"><span data-i18n="login.btn">Login</span></button>
+                                   
                                 </button>
                             </form>
                             
                             <p class="text-center mt-3 mb-0">
-                                Don't have an account? <a href="register.html">Sign up here</a>
+                                <span data-i18n="login.noAccount">Don't have an account?</span> <a href="register.html" data-i18n="login.signupLink">Sign up here</a>
                             </p>
                         </div>
                     </div>

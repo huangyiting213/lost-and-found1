@@ -1,5 +1,8 @@
 import { auth } from "./firebase-config.js";
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { initLangToggle } from "./i18n.js";
+
+initLangToggle();
 
 const form = document.getElementById("loginForm");
 const alertBox = document.getElementById("alertBox");

@@ -20,21 +20,25 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarMenu">
                 <ul class="navbar-nav ms-auto align-items-lg-center">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="browse.html">Browse Items</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="report-lost.html">Report Lost</a></li>
-                    <li class="nav-item"><a class="nav-link" href="report-found.html">Report Found</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html" data-i18n="nav.home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="browse.html" data-i18n="nav.browse">Browse Items</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="report-lost.html" data-i18n="nav.reportLost">Report Lost</a></li>
+                    <li class="nav-item"><a class="nav-link" href="report-found.html" data-i18n="nav.reportFound">Report Found</a></li>
+                    <li class="nav-item">
+                        <button class="btn btn-sm btn-outline-light ms-lg-2" id="langToggle" type="button">中文</button>
+                    </li>
                     <li class="nav-item d-none" id="guestMenu">
-                        <a class="nav-link btn btn-warning text-dark px-3 ms-lg-2" href="login.html">Login</a>
+                        <a class="nav-link btn btn-warning text-dark px-3 ms-lg-2" href="login.html" data-i18n="nav.login">Login</a>
                     </li>
                     <li class="nav-item dropdown d-none" id="userMenu">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                             <i class="bi bi-person-circle"></i> <span id="userNameDisplay">User</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="my-posts.html"><i class="bi bi-list-ul"></i> My Posts</a></li>
+                            <li><a class="dropdown-item" href="my-posts.html" data-i18n="nav.myPosts">My Posts</a></li>
+                            <li><a class="dropdown-item d-none" href="admin.html" id="adminLink" data-i18n="nav.admin">Admin Panel</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                            <li><a class="dropdown-item" href="#" id="logoutBtn" data-i18n="nav.logout">Logout</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -48,59 +52,59 @@
                 <div class="col-lg-8">
                     <div class="card shadow-sm border-0">
                         <div class="card-body p-4 p-md-5">
-                            <h2 class="mb-1"><i class="bi bi-exclamation-circle text-danger"></i> Report a Lost Item</h2>
-                            <p class="text-muted mb-4">Provide details about the item you lost. The more accurate, the better!</p>
+                            <h2 class="mb-1"><i class="bi bi-exclamation-circle text-danger"></i> <span data-i18n="report.lostTitle">Report a Lost Item</span></h2>
+                            <p class="text-muted mb-4" data-i18n="report.lostSubtitle">Provide details about the item you lost. The more accurate, the better!</p>
                             
                             <div id="alertBox" class="alert d-none" role="alert"></div>
                             
                             <form id="reportForm">
                                 <div class="mb-3">
-                                    <label class="form-label">Item Title <span class="text-danger">*</span></label>
+                                    <label class="form-label"><span data-i18n="report.itemTitle">Item Title</span> <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" id="title" placeholder="e.g. Black iPhone 13 Pro" required>
                                 </div>
                                 
                                 <div class="mb-3">
-                                    <label class="form-label">Category <span class="text-danger">*</span></label>
+                                    <label class="form-label"><span data-i18n="report.category">Category</span> <span class="text-danger">*</span></label>
                                     <select class="form-select" id="category" required>
-                                        <option value="">-- Select category --</option>
-                                        <option value="Electronics">Electronics (Phone, Laptop, etc.)</option>
-                                        <option value="ID & Cards">ID & Cards (Student Card, Bank Card)</option>
-                                        <option value="Bags & Wallets">Bags & Wallets</option>
-                                        <option value="Keys">Keys</option>
-                                        <option value="Clothing">Clothing & Accessories</option>
-                                        <option value="Books">Books & Stationery</option>
-                                        <option value="Jewelry">Jewelry & Watches</option>
-                                        <option value="Other">Other</option>
+                                        <option value="" data-i18n="report.selectCategory">-- Select category --</option>
+                                        <option value="Electronics" data-i18n="cat.electronics">Electronics</option>
+                                        <option value="ID & Cards" data-i18n="cat.idCards">ID & Cards</option>
+                                        <option value="Bags & Wallets" data-i18n="cat.bags">Bags & Wallets</option>
+                                        <option value="Keys" data-i18n="cat.keys">Keys</option>
+                                        <option value="Clothing" data-i18n="cat.clothing">Clothing & Accessories</option>
+                                        <option value="Books" data-i18n="cat.books">Books & Stationery</option>
+                                        <option value="Jewelry" data-i18n="cat.jewelry">Jewelry & Watches</option>
+                                        <option value="Other" data-i18n="cat.other">Other</option>
                                     </select>
                                 </div>
                                 
                                 <div class="mb-3">
-                                    <label class="form-label">Description <span class="text-danger">*</span></label>
+                                    <label class="form-label"><span data-i18n="report.description">Description</span> <span class="text-danger">*</span></label>
                                     <textarea class="form-control" id="description" rows="4" placeholder="Color, brand, distinctive features, what's inside (for bags)..." required></textarea>
                                 </div>
                                 
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Location <span class="text-danger">*</span></label>
+                                        <label class="form-label"><span data-i18n="report.location">Location</span> <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" id="location" placeholder="e.g. FTSM Library 2nd floor" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Date Lost <span class="text-danger">*</span></label>
+                                        <label class="form-label"><span data-i18n="report.date">Date Lost</span> <span class="text-danger">*</span></label>
                                         <input type="date" class="form-control" id="date" required>
                                     </div>
                                 </div>
                                 
                                 <div class="mb-3">
-                                    <label class="form-label">Photo (optional)</label>
+                                    <label class="form-label" data-i18n="report.photo">Photo (optional)</label>
                                     <input type="file" class="form-control" id="photo" accept="image/*">
-                                    <small class="text-muted">A photo helps people identify your item. Max 5 MB.</small>
+                                    <small class="text-muted" data-i18n="report.photoHint">A photo helps people identify your item. Max 5 MB.</small>
                                     <div class="mt-2">
                                         <img id="photoPreview" class="img-fluid rounded d-none" style="max-height: 200px;">
                                     </div>
                                 </div>
                                 
                                 <button type="submit" class="btn btn-danger btn-lg w-100" id="submitBtn">
-                                    <i class="bi bi-send"></i> Submit Report
+                                    <i class="bi bi-send"></i> <span data-i18n="report.submitBtn">Submit Report</span>
                                 </button>
                             </form>
                         </div>

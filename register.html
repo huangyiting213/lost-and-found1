@@ -24,39 +24,39 @@
                 <div class="col-md-6 col-lg-5">
                     <div class="card shadow-sm border-0">
                         <div class="card-body p-4 p-md-5">
-                            <h2 class="text-center mb-4">Create an Account</h2>
+                            <h2 class="text-center mb-4" data-i18n="register.title">Create an Account</h2>
                             
                             <div id="alertBox" class="alert d-none" role="alert"></div>
                             
                             <form id="registerForm">
                                 <div class="mb-3">
-                                    <label class="form-label">Full Name</label>
+                                    <label class="form-label" data-i18n="register.fullName">Full Name</label>
                                     <input type="text" class="form-control" id="fullName" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Student / Matric ID</label>
+                                    <label class="form-label" data-i18n="register.matricId">Student / Matric ID</label>
                                     <input type="text" class="form-control" id="matricId" placeholder="e.g. A123456" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">UKM Email</label>
+                                    <label class="form-label" data-i18n="register.email">UKM Email</label>
                                     <input type="email" class="form-control" id="email" placeholder="example@siswa.ukm.edu.my" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Password</label>
+                                    <label class="form-label" data-i18n="register.password">Password</label>
                                     <input type="password" class="form-control" id="password" minlength="6" required>
-                                    <small class="text-muted">At least 6 characters</small>
+                                    <small class="text-muted" data-i18n="register.passwordHint">At least 6 characters</small>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Phone Number</label>
+                                    <label class="form-label" data-i18n="register.phone">Phone Number</label>
                                     <input type="tel" class="form-control" id="phone" placeholder="e.g. 0123456789" required>
                                 </div>
-                                <button type="submit" class="btn btn-primary w-100 btn-lg" id="registerBtn">
-                                    Sign Up
+                                <button type="submit" class="btn btn-primary w-100 btn-lg" id="registerBtn"><span data-i18n="register.btn">Sign Up</span></button>
+                                   
                                 </button>
                             </form>
                             
                             <p class="text-center mt-3 mb-0">
-                                Already have an account? <a href="login.html">Login here</a>
+                              <span data-i18n="register.haveAccount">Already have an account?</span> <a href="login.html" data-i18n="register.loginLink">Login here</a>
                             </p>
                         </div>
                     </div>

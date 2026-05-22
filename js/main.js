@@ -1,8 +1,10 @@
 import { db } from "./firebase-config.js";
 import { setupNavbar } from "./auth-state.js";
+import { initLangToggle } from "./i18n.js";
 import { collection, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 setupNavbar();
+initLangToggle();
 
 async function loadRecentItems() {
     const container = document.getElementById("recentItemsContainer");

@@ -14,4 +14,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
-export const GEMINI_API_KEY = "AIzaSyAX34zkZqy8r13hdWLfeu6JDIMe7w5ERas";
+export const GEMINI_API_KEY = "AIzaSyByuafT9uxs6XPYxpp7WEvLlSXJsVt0ADs";

@@ -20,21 +20,25 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarMenu">
                 <ul class="navbar-nav ms-auto align-items-lg-center">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="browse.html">Browse Items</a></li>
-                    <li class="nav-item"><a class="nav-link" href="report-lost.html">Report Lost</a></li>
-                    <li class="nav-item"><a class="nav-link" href="report-found.html">Report Found</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html" data-i18n="nav.home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="browse.html" data-i18n="nav.browse">Browse Items</a></li>
+                    <li class="nav-item"><a class="nav-link" href="report-lost.html" data-i18n="nav.reportLost">Report Lost</a></li>
+                    <li class="nav-item"><a class="nav-link" href="report-found.html" data-i18n="nav.reportFound">Report Found</a></li>
+                    <li class="nav-item">
+                        <button class="btn btn-sm btn-outline-light ms-lg-2" id="langToggle" type="button">中文</button>
+                    </li>
                     <li class="nav-item d-none" id="guestMenu">
-                        <a class="nav-link btn btn-warning text-dark px-3 ms-lg-2" href="login.html">Login</a>
+                        <a class="nav-link btn btn-warning text-dark px-3 ms-lg-2" href="login.html" data-i18n="nav.login">Login</a>
                     </li>
                     <li class="nav-item dropdown d-none" id="userMenu">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                             <i class="bi bi-person-circle"></i> <span id="userNameDisplay">User</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="my-posts.html"><i class="bi bi-list-ul"></i> My Posts</a></li>
+                            <li><a class="dropdown-item" href="my-posts.html" data-i18n="nav.myPosts">My Posts</a></li>
+                            <li><a class="dropdown-item d-none" href="admin.html" id="adminLink" data-i18n="nav.admin">Admin Panel</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                            <li><a class="dropdown-item" href="#" id="logoutBtn" data-i18n="nav.logout">Logout</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -45,18 +49,17 @@
     <section class="py-4 bg-light min-vh-100">
         <div class="container">
             <a href="browse.html" class="btn btn-link text-decoration-none mb-3 px-0">
-                <i class="bi bi-arrow-left"></i> Back to Browse
+                <i class="bi bi-arrow-left"></i> <span data-i18n="item.back">Back to Browse</span>
             </a>
 
             <div id="loadingSpinner" class="text-center py-5">
                 <div class="spinner-border text-primary" role="status"></div>
-                <p class="mt-2 text-muted">Loading item details...</p>
             </div>
 
             <div id="notFound" class="text-center py-5 d-none">
                 <i class="bi bi-exclamation-triangle" style="font-size: 4rem; color: #ccc;"></i>
-                <h4 class="mt-3 text-muted">Item not found</h4>
-                <a href="browse.html" class="btn btn-primary mt-2">Browse Other Items</a>
+                <h4 class="mt-3 text-muted" data-i18n="item.notFound">Item not found</h4>
+                <a href="browse.html" class="btn btn-primary mt-2" data-i18n="item.browseOther">Browse Other Items</a>
             </div>
 
             <div id="itemDetail" class="d-none">
@@ -74,23 +77,23 @@
                                 </div>
                                 <h2 id="itemTitle" class="mb-3"></h2>
                                 <div class="mb-3">
-                                    <p class="mb-2"><i class="bi bi-geo-alt-fill text-primary"></i> <strong>Location:</strong> <span id="itemLocation"></span></p>
-                                    <p class="mb-2"><i class="bi bi-calendar-event-fill text-primary"></i> <strong>Date:</strong> <span id="itemDate"></span></p>
-                                    <p class="mb-2"><i class="bi bi-person-fill text-primary"></i> <strong>Posted by:</strong> <span id="itemPoster"></span></p>
+                                    <p class="mb-2"><i class="bi bi-geo-alt-fill text-primary"></i> <strong data-i18n="item.location">Location:</strong> <span id="itemLocation"></span></p>
+                                    <p class="mb-2"><i class="bi bi-calendar-event-fill text-primary"></i> <strong data-i18n="item.date">Date:</strong> <span id="itemDate"></span></p>
+                                    <p class="mb-2"><i class="bi bi-person-fill text-primary"></i> <strong data-i18n="item.postedBy">Posted by:</strong> <span id="itemPoster"></span></p>
                                 </div>
                                 <hr>
-                                <h5>Description</h5>
+                                <h5 data-i18n="item.description">Description</h5>
                                 <p id="itemDescription" class="text-muted"></p>
                                 <hr>
                                 <button id="contactBtn" class="btn btn-primary btn-lg w-100">
-                                    <i class="bi bi-envelope-fill"></i> Contact Poster
+                                    <i class="bi bi-envelope-fill"></i> <span data-i18n="item.contactBtn">Contact Poster</span>
                                 </button>
                                 <div id="contactInfo" class="alert alert-info mt-3 d-none">
-                                    <h6 class="mb-2"><i class="bi bi-info-circle"></i> Contact Information</h6>
-                                    <p class="mb-1"><strong>Email:</strong> <span id="contactEmail"></span></p>
-                                    <p class="mb-2"><strong>Phone:</strong> <span id="contactPhone"></span></p>
+                                    <h6 class="mb-2"><i class="bi bi-info-circle"></i> <span data-i18n="item.contactInfo">Contact Information</span></h6>
+                                    <p class="mb-1"><strong data-i18n="item.email">Email:</strong> <span id="contactEmail"></span></p>
+                                    <p class="mb-2"><strong data-i18n="item.phone">Phone:</strong> <span id="contactPhone"></span></p>
                                     <a id="emailLink" class="btn btn-sm btn-success" href="#">
-                                        <i class="bi bi-envelope"></i> Send Email
+                                        <i class="bi bi-envelope"></i> <span data-i18n="item.sendEmail">Send Email</span>
                                     </a>
                                 </div>
                             </div>
@@ -102,16 +105,16 @@
                     <div class="card border-0 shadow-sm">
                         <div class="card-body p-4">
                             <h4 class="mb-1">
-                                <i class="bi bi-stars text-warning"></i> AI Smart Matches
+                                <i class="bi bi-stars text-warning"></i> <span data-i18n="item.aiTitle">AI Smart Matches</span>
                             </h4>
-                            <p class="text-muted small mb-4">Our AI analyzed this item and found these potential matches from the opposite category.</p>
+                            <p class="text-muted small mb-4" data-i18n="item.aiSubtitle">Our AI analyzed this item and found these potential matches from the opposite category.</p>
                             <div id="aiLoading" class="text-center py-4">
                                 <div class="spinner-border text-warning" role="status"></div>
-                                <p class="mt-2 text-muted small">AI is analyzing potential matches...</p>
+                                <p class="mt-2 text-muted small" data-i18n="item.aiAnalyzing">AI is analyzing potential matches...</p>
                             </div>
                             <div id="aiResults" class="row g-3"></div>
                             <div id="aiNoMatch" class="text-center py-3 text-muted d-none">
-                                <p class="mb-0">No strong matches found yet. Check back later as new items are posted.</p>
+                                <p class="mb-0" data-i18n="item.aiNoMatch">No strong matches found yet. Check back later as new items are posted.</p>
                             </div>
                         </div>
                     </div>

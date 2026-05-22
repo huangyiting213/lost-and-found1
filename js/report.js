@@ -2,10 +2,12 @@ import { auth, db } from "./firebase-config.js";
 import { setupNavbar, requireLogin } from "./auth-state.js";
 import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { initLangToggle } from "./i18n.js";
 
 const IMGBB_API_KEY = "b5ef66d00673c41175a802f8d7ee0f11";
 
 setupNavbar();
+initLangToggle();
 
 const currentUser = await requireLogin();
 

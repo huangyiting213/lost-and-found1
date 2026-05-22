@@ -1,8 +1,10 @@
 import { db } from "./firebase-config.js";
 import { setupNavbar } from "./auth-state.js";
 import { collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { initLangToggle, t, applyTranslations } from "./i18n.js";
 
 setupNavbar();
+initLangToggle();
 
 const itemsContainer = document.getElementById("itemsContainer");
 const loadingSpinner = document.getElementById("loadingSpinner");
@@ -66,7 +68,7 @@ function renderItems(items) {
     }
     
     emptyState.classList.add("d-none");
-    resultsCount.textContent = `${items.length} item${items.length > 1 ? "s" : ""} found`;
+    resultsCount.textContent = `${items.length} ${t("browse.lost") ? "" : ""}${items.length} items`;
     
     items.forEach((item) => {
         const card = createCard(item);
@@ -79,7 +81,7 @@ function createCard(item) {
     col.className = "col-md-6 col-lg-4";
     
     const badgeClass = item.type === "lost" ? "bg-danger" : "bg-success";
-    const badgeText = item.type === "lost" ? "Lost" : "Found";
+    const badgeText = item.type === "lost" ? t("browse.lost") : t("browse.found");
     
     const photoHtml = item.photoUrl
         ? `<img src="${item.photoUrl}" class="card-img-top" style="height: 200px; object-fit: cover;" alt="${escapeHtml(item.title)}">`
@@ -104,7 +106,7 @@ function createCard(item) {
             </div>
             <div class="card-footer bg-white border-0 pt-0">
                 <small class="text-muted">
-                    <i class="bi bi-person"></i> Posted by ${escapeHtml(item.userName || "User")}
+                    <i class="bi bi-person"></i> Posted by ${t("browse.postedBy")} ${escapeHtml(item.userName || "User")}
                 </small>
             </div>
         </div>

@@ -1,8 +1,10 @@
 import { db, GEMINI_API_KEY } from "./firebase-config.js";
 import { setupNavbar } from "./auth-state.js";
 import { doc, getDoc, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { initLangToggle, t } from "./i18n.js";
 
 setupNavbar();
+initLangToggle();
 
 const params = new URLSearchParams(window.location.search);
 const itemId = params.get("id");
@@ -58,10 +60,10 @@ function renderItem(item) {
     const typeBadge = document.getElementById("typeBadge");
     if (item.type === "lost") {
         typeBadge.className = "badge bg-danger fs-6";
-        typeBadge.textContent = "Lost";
+        typeBadge.textContent = t("browse.lost");
     } else {
         typeBadge.className = "badge bg-success fs-6";
-        typeBadge.textContent = "Found";
+        typeBadge.textContent = t("browse.found");
     }
 
     document.getElementById("categoryBadge").textContent = item.category;
@@ -69,7 +71,7 @@ function renderItem(item) {
     const statusBadge = document.getElementById("statusBadge");
     if (item.status === "resolved") {
         statusBadge.className = "badge bg-dark fs-6";
-        statusBadge.textContent = "Resolved";
+       statusBadge.textContent = t("item.resolved");
     } else {
         statusBadge.classList.add("d-none");
     }
@@ -220,7 +222,7 @@ function createMatchCard(item, score, reason) {
             ${item.photoUrl ? `<img src="${item.photoUrl}" class="card-img-top" style="height: 150px; object-fit: cover;" alt="">` : ""}
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-2">
-                    <span class="badge bg-${scoreColor}">${score}% match</span>
+                    <span class="badge bg-${scoreColor}">${score}% ${t("item.match")}</span>
                     <span class="badge bg-secondary">${escapeHtml(item.category)}</span>
                 </div>
                 <h6 class="card-title">${escapeHtml(item.title)}</h6>

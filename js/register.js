@@ -1,7 +1,8 @@
 import { auth, db } from "./firebase-config.js";
 import { createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
+import { initLangToggle } from "./i18n.js";
+initLangToggle();
 const form = document.getElementById("registerForm");
 const alertBox = document.getElementById("alertBox");
 const registerBtn = document.getElementById("registerBtn");
