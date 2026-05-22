@@ -1,4 +1,4 @@
-import { db } from "./firebase-config.js";
+import { db, GEMINI_API_KEY } from "./firebase-config.js";
 import { setupNavbar } from "./auth-state.js";
 import { doc, getDoc, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -170,13 +170,22 @@ Return ONLY a valid JSON array (no markdown, no code fences) of matches with a s
 
 If no good matches, return [].`;
 
-   console.log("🤖 [AI] Sending request to backend proxy...");
+  console.log("🤖 [AI] Sending request to Gemini...");
 
-    const response = await fetch("/api/gemini", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: prompt })
-    });
+    const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${GEMINI_API_KEY}`,
+        {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                contents: [{ parts: [{ text: prompt }] }],
+                generationConfig: {
+                    temperature: 0.2,
+                    responseMimeType: "application/json"
+                }
+            })
+        }
+    );
 
     console.log("🤖 [AI] Response status:", response.status);
 
