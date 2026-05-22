@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UKM Lost & Found - Find What You Lost</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="bi bi-search"></i> UKM Lost & Found
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarMenu">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="browse.html">Browse Items</a></li>
+                    <li class="nav-item"><a class="nav-link" href="report-lost.html">Report Lost</a></li>
+                    <li class="nav-item"><a class="nav-link" href="report-found.html">Report Found</a></li>
+                    <li class="nav-item d-none" id="guestMenu">
+                        <a class="nav-link btn btn-warning text-dark px-3 ms-lg-2" href="login.html">Login</a>
+                    </li>
+                    <li class="nav-item dropdown d-none" id="userMenu">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-circle"></i> <span id="userNameDisplay">User</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="my-posts.html"><i class="bi bi-list-ul"></i> My Posts</a></li>
+                            <li><a class="dropdown-item d-none" href="admin.html" id="adminLink"><i class="bi bi-shield-lock"></i> Admin Panel</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section text-white text-center py-5">
+        <div class="container py-5">
+            <h1 class="display-4 fw-bold mb-3">Lost something on campus?</h1>
+            <p class="lead mb-4">A smart, fast, and reliable way to recover lost items at UKM.</p>
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                <a href="report-lost.html" class="btn btn-warning btn-lg px-4">
+                    <i class="bi bi-exclamation-circle"></i> Report Lost Item
+                </a>
+                <a href="report-found.html" class="btn btn-light btn-lg px-4">
+                    <i class="bi bi-box-seam"></i> Report Found Item
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-4">Search for an Item</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="input-group input-group-lg shadow-sm">
+                        <input type="text" class="form-control" id="homeSearchInput" placeholder="Search by keyword (e.g. iPhone, blue wallet)...">
+                        <button class="btn btn-primary" type="button" id="homeSearchBtn">
+                            <i class="bi bi-search"></i> Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">How It Works</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card text-center p-4 h-100">
+                        <div class="feature-icon mb-3">
+                            <i class="bi bi-pencil-square"></i>
+                        </div>
+                        <h4>1. Report</h4>
+                        <p class="text-muted">Quickly post details and a photo of the item you lost or found on campus.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card text-center p-4 h-100">
+                        <div class="feature-icon mb-3">
+                            <i class="bi bi-cpu"></i>
+                        </div>
+                        <h4>2. AI Matching</h4>
+                        <p class="text-muted">Our system uses AI to automatically match lost reports with found items.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card text-center p-4 h-100">
+                        <div class="feature-icon mb-3">
+                            <i class="bi bi-bell"></i>
+                        </div>
+                        <h4>3. Get Notified</h4>
+                        <p class="text-muted">Receive instant notifications when a potential match is found.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Recently Reported</h2>
+            <div class="row g-4" id="recentItemsContainer">
+                <div class="col-12 text-center py-4">
+                    <div class="spinner-border text-primary" role="status"></div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="browse.html" class="btn btn-outline-primary">View All Items <i class="bi bi-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white py-4 text-center">
+        <div class="container">
+            <p class="mb-1">UKM Lost & Found System</p>
+            <p class="mb-0 small text-muted">Faculty of Information Science and Technology, Universiti Kebangsaan Malaysia</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
