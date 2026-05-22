@@ -1,8 +1,10 @@
 import { db } from "./firebase-config.js";
 import { setupNavbar, requireLogin } from "./auth-state.js";
+import { initLangToggle, t } from "./i18n.js";
 import { collection, query, where, getDocs, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 setupNavbar();
+initLangToggle();
 
 const currentUser = await requireLogin();
 
@@ -51,13 +53,13 @@ function createPostCard(item) {
     col.className = "col-md-6 col-lg-4";
 
     const typeBadge = item.type === "lost"
-        ? '<span class="badge bg-danger">Lost</span>'
-        : '<span class="badge bg-success">Found</span>';
+        ? `<span class="badge bg-danger">${t("browse.lost")}</span>`
+        : `<span class="badge bg-success">${t("browse.found")}</span>`;
 
     const isResolved = item.status === "resolved";
     const statusBadge = isResolved
-        ? '<span class="badge bg-dark">Resolved</span>'
-        : '<span class="badge bg-primary">Active</span>';
+        ? `<span class="badge bg-dark">${t("myposts.resolved")}</span>`
+        : `<span class="badge bg-primary">${t("myposts.active")}</span>`;
 
     const photoHtml = item.photoUrl
         ? `<img src="${item.photoUrl}" class="card-img-top" style="height: 180px; object-fit: cover;" alt="">`
@@ -73,9 +75,9 @@ function createPostCard(item) {
                 <p class="card-text small">${escapeHtml((item.description || "").substring(0, 80))}${(item.description || "").length > 80 ? "..." : ""}</p>
             </div>
             <div class="card-footer bg-white border-0 d-flex gap-2">
-                <a href="item.html?id=${item.id}" class="btn btn-sm btn-outline-primary flex-fill">View</a>
+                <a href="item.html?id=${item.id}" class="btn btn-sm btn-outline-primary flex-fill">${t("myposts.view")}</a>
                 <button class="btn btn-sm btn-outline-success flex-fill toggle-resolve" data-id="${item.id}" data-status="${item.status}">
-                    ${isResolved ? "Reopen" : "Mark Resolved"}
+                    ${isResolved ? t("myposts.reopen") : t("myposts.markResolved")}
                 </button>
                 <button class="btn btn-sm btn-outline-danger delete-post" data-id="${item.id}" data-title="${escapeHtml(item.title)}">
                     <i class="bi bi-trash"></i>

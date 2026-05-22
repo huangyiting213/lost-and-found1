@@ -15,27 +15,28 @@
             <a class="navbar-brand fw-bold" href="index.html">
                 <i class="bi bi-shield-lock"></i> UKM Lost & Found — Admin
             </a>
-            <div class="ms-auto">
-                <a href="index.html" class="btn btn-outline-light btn-sm"><i class="bi bi-house"></i> Back to Site</a>
-                <a href="#" class="btn btn-outline-warning btn-sm" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Logout</a>
+            <div class="ms-auto d-flex align-items-center gap-2">
+                <button class="btn btn-outline-light btn-sm" id="langToggle" type="button">中文</button>
+                <a href="index.html" class="btn btn-outline-light btn-sm"><i class="bi bi-house"></i> <span data-i18n="admin.backToSite">Back to Site</span></a>
+                <a href="#" class="btn btn-outline-warning btn-sm" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> <span data-i18n="admin.logout">Logout</span></a>
             </div>
         </div>
     </nav>
 
     <div id="accessChecking" class="text-center py-5">
         <div class="spinner-border text-primary"></div>
-        <p class="mt-2 text-muted">Verifying access...</p>
+        <p class="mt-2 text-muted" data-i18n="admin.verifying">Verifying access...</p>
     </div>
 
     <div id="accessDenied" class="container text-center py-5 d-none">
         <i class="bi bi-shield-x text-danger" style="font-size: 4rem;"></i>
-        <h3 class="mt-3">Access Denied</h3>
-        <p class="text-muted">You do not have permission to view this page.</p>
-        <a href="index.html" class="btn btn-primary">Back to Home</a>
+        <h3 class="mt-3" data-i18n="admin.accessDenied">Access Denied</h3>
+        <p class="text-muted" data-i18n="admin.noPermission">You do not have permission to view this page.</p>
+        <a href="index.html" class="btn btn-primary" data-i18n="admin.backHome">Back to Home</a>
     </div>
 
     <div id="adminContent" class="container py-4 d-none">
-        <h1 class="mb-4">Admin Dashboard</h1>
+        <h1 class="mb-4" data-i18n="admin.dashboard">Admin Dashboard</h1>
 
         <div class="row g-3 mb-4">
             <div class="col-6 col-md-3">
@@ -43,7 +44,7 @@
                     <div class="card-body">
                         <i class="bi bi-box-seam text-primary fs-2"></i>
                         <h3 class="mt-2 mb-0" id="statTotal">0</h3>
-                        <small class="text-muted">Total Items</small>
+                        <small class="text-muted" data-i18n="admin.totalItems">Total Items</small>
                     </div>
                 </div>
             </div>
@@ -52,7 +53,7 @@
                     <div class="card-body">
                         <i class="bi bi-exclamation-circle text-danger fs-2"></i>
                         <h3 class="mt-2 mb-0" id="statLost">0</h3>
-                        <small class="text-muted">Lost Items</small>
+                        <small class="text-muted" data-i18n="admin.lostItems">Lost Items</small>
                     </div>
                 </div>
             </div>
@@ -61,7 +62,7 @@
                     <div class="card-body">
                         <i class="bi bi-check-circle text-success fs-2"></i>
                         <h3 class="mt-2 mb-0" id="statFound">0</h3>
-                        <small class="text-muted">Found Items</small>
+                        <small class="text-muted" data-i18n="admin.foundItems">Found Items</small>
                     </div>
                 </div>
             </div>
@@ -70,15 +71,15 @@
                     <div class="card-body">
                         <i class="bi bi-people text-info fs-2"></i>
                         <h3 class="mt-2 mb-0" id="statUsers">0</h3>
-                        <small class="text-muted">Users</small>
+                        <small class="text-muted" data-i18n="admin.users">Users</small>
                     </div>
                 </div>
             </div>
         </div>
 
         <ul class="nav nav-tabs mb-3" role="tablist">
-            <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#itemsTab">All Items</button></li>
-            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#usersTab">All Users</button></li>
+            <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#itemsTab" data-i18n="admin.tabItems">All Items</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#usersTab" data-i18n="admin.tabUsers">All Users</button></li>
         </ul>
 
         <div class="tab-content">
@@ -87,7 +88,13 @@
                     <table class="table table-hover align-middle bg-white shadow-sm">
                         <thead class="table-light">
                             <tr>
-                                <th>Type</th><th>Title</th><th>Category</th><th>Location</th><th>Posted By</th><th>Status</th><th>Action</th>
+                                <th data-i18n="admin.colType">Type</th>
+                                <th data-i18n="admin.colTitle">Title</th>
+                                <th data-i18n="admin.colCategory">Category</th>
+                                <th data-i18n="admin.colLocation">Location</th>
+                                <th data-i18n="admin.colPostedBy">Posted By</th>
+                                <th data-i18n="admin.colStatus">Status</th>
+                                <th data-i18n="admin.colAction">Action</th>
                             </tr>
                         </thead>
                         <tbody id="itemsTableBody"></tbody>
@@ -100,7 +107,11 @@
                     <table class="table table-hover align-middle bg-white shadow-sm">
                         <thead class="table-light">
                             <tr>
-                                <th>Name</th><th>Matric ID</th><th>Email</th><th>Phone</th><th>Role</th>
+                                <th data-i18n="admin.colName">Name</th>
+                                <th data-i18n="admin.colMatric">Matric ID</th>
+                                <th data-i18n="admin.colEmail">Email</th>
+                                <th data-i18n="admin.colPhone">Phone</th>
+                                <th data-i18n="admin.colRole">Role</th>
                             </tr>
                         </thead>
                         <tbody id="usersTableBody"></tbody>

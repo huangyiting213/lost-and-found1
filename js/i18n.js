@@ -107,7 +107,43 @@ const translations = {
         "item.aiSubtitle": "Our AI analyzed this item and found these potential matches from the opposite category.",
         "item.aiAnalyzing": "AI is analyzing potential matches...",
         "item.aiNoMatch": "No strong matches found yet. Check back later as new items are posted.",
-        "item.match": "match"
+        "item.match": "match",
+
+        "myposts.title": "My Posts",
+        "myposts.empty": "You haven't posted anything yet",
+        "myposts.reportLostBtn": "Report Lost Item",
+        "myposts.reportFoundBtn": "Report Found Item",
+        "myposts.active": "Active",
+        "myposts.resolved": "Resolved",
+        "myposts.view": "View",
+        "myposts.markResolved": "Mark Resolved",
+        "myposts.reopen": "Reopen",
+
+        "admin.backToSite": "Back to Site",
+        "admin.logout": "Logout",
+        "admin.verifying": "Verifying access...",
+        "admin.accessDenied": "Access Denied",
+        "admin.noPermission": "You do not have permission to view this page.",
+        "admin.backHome": "Back to Home",
+        "admin.dashboard": "Admin Dashboard",
+        "admin.totalItems": "Total Items",
+        "admin.lostItems": "Lost Items",
+        "admin.foundItems": "Found Items",
+        "admin.users": "Users",
+        "admin.tabItems": "All Items",
+        "admin.tabUsers": "All Users",
+        "admin.colType": "Type",
+        "admin.colTitle": "Title",
+        "admin.colCategory": "Category",
+        "admin.colLocation": "Location",
+        "admin.colPostedBy": "Posted By",
+        "admin.colStatus": "Status",
+        "admin.colAction": "Action",
+        "admin.colName": "Name",
+        "admin.colMatric": "Matric ID",
+        "admin.colEmail": "Email",
+        "admin.colPhone": "Phone",
+        "admin.colRole": "Role"
     },
     zh: {
         "nav.home": "首页",
@@ -217,7 +253,43 @@ const translations = {
         "item.aiSubtitle": "AI 已分析此物品,从相反类别中找到这些潜在匹配。",
         "item.aiAnalyzing": "AI 正在分析潜在匹配……",
         "item.aiNoMatch": "暂未找到强匹配。随着新物品发布,稍后再来看看。",
-        "item.match": "匹配度"
+        "item.match": "匹配度",
+
+        "myposts.title": "我的发布",
+        "myposts.empty": "你还没有发布任何物品",
+        "myposts.reportLostBtn": "上报失物",
+        "myposts.reportFoundBtn": "上报拾获物",
+        "myposts.active": "进行中",
+        "myposts.resolved": "已解决",
+        "myposts.view": "查看",
+        "myposts.markResolved": "标记已解决",
+        "myposts.reopen": "重新开启",
+
+        "admin.backToSite": "返回网站",
+        "admin.logout": "退出登录",
+        "admin.verifying": "正在验证权限……",
+        "admin.accessDenied": "访问被拒绝",
+        "admin.noPermission": "你没有权限查看此页面。",
+        "admin.backHome": "返回首页",
+        "admin.dashboard": "管理控制台",
+        "admin.totalItems": "物品总数",
+        "admin.lostItems": "失物数",
+        "admin.foundItems": "拾获数",
+        "admin.users": "用户数",
+        "admin.tabItems": "全部物品",
+        "admin.tabUsers": "全部用户",
+        "admin.colType": "类型",
+        "admin.colTitle": "名称",
+        "admin.colCategory": "类别",
+        "admin.colLocation": "地点",
+        "admin.colPostedBy": "发布者",
+        "admin.colStatus": "状态",
+        "admin.colAction": "操作",
+        "admin.colName": "姓名",
+        "admin.colMatric": "学号",
+        "admin.colEmail": "邮箱",
+        "admin.colPhone": "电话",
+        "admin.colRole": "角色"
     }
 };
 
@@ -227,8 +299,7 @@ export function getLang() {
 
 export function setLang(lang) {
     localStorage.setItem("lang", lang);
-    applyTranslations();
-    updateLangButton();
+    location.reload();
 }
 
 export function t(key) {

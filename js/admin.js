@@ -1,6 +1,9 @@
 import { auth, db } from "./firebase-config.js";
 import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { collection, getDocs, doc, getDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { initLangToggle, t } from "./i18n.js";
+
+initLangToggle();
 
 const accessChecking = document.getElementById("accessChecking");
 const accessDenied = document.getElementById("accessDenied");
@@ -59,12 +62,12 @@ async function loadItems() {
 
     items.forEach((item) => {
         const tr = document.createElement("tr");
-        const typeBadge = item.type === "lost"
-            ? '<span class="badge bg-danger">Lost</span>'
-            : '<span class="badge bg-success">Found</span>';
+       const typeBadge = item.type === "lost"
+            ? `<span class="badge bg-danger">${t("browse.lost")}</span>`
+            : `<span class="badge bg-success">${t("browse.found")}</span>`;
         const statusBadge = item.status === "resolved"
-            ? '<span class="badge bg-dark">Resolved</span>'
-            : '<span class="badge bg-primary">Active</span>';
+            ? `<span class="badge bg-dark">${t("myposts.resolved")}</span>`
+            : `<span class="badge bg-primary">${t("myposts.active")}</span>`;
 
         tr.innerHTML = `
             <td>${typeBadge}</td>
