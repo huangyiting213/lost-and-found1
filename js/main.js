@@ -70,3 +70,56 @@ function escapeHtml(text) {
 
 loadRecentItems();
 console.log("UKM Lost & Found loaded");
+
+
+
+async function loadHomeStats() {
+    const elTotal = document.getElementById("statTotalItems");
+    const elResolved = document.getElementById("statResolved");
+    const elUsers = document.getElementById("statUsers");
+
+    if (!elTotal && !elResolved && !elUsers) return; // 不在首页就跳过
+
+    try {
+        // 读 items 集合
+        const itemsSnap = await getDocs(collection(db, "items"));
+        let total = 0, resolved = 0;
+        itemsSnap.forEach(doc => {
+            total++;
+            if (doc.data().status === "resolved") resolved++;
+        });
+
+        // 读 users 集合
+        const usersSnap = await getDocs(collection(db, "users"));
+        const users = usersSnap.size;
+
+        // 动画式数字显示(从 0 数到真实数,显得专业)
+        animateNumber(elTotal, total);
+        animateNumber(elResolved, resolved);
+        animateNumber(elUsers, users);
+    } catch (error) {
+        console.error("Failed to load home stats:", error);
+        // 失败就不显示,保持 "—",不影响其他功能
+    }
+}
+
+function animateNumber(el, target) {
+    if (!el) return;
+    const duration = 1200;
+    const steps = 30;
+    const stepValue = target / steps;
+    let current = 0;
+    let step = 0;
+    const interval = setInterval(() => {
+        step++;
+        current += stepValue;
+        if (step >= steps) {
+            el.textContent = target;
+            clearInterval(interval);
+        } else {
+            el.textContent = Math.floor(current);
+        }
+    }, duration / steps);
+}
+
+loadHomeStats();

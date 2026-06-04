@@ -68,7 +68,7 @@ function renderItems(items) {
     }
     
     emptyState.classList.add("d-none");
-    resultsCount.textContent = `${items.length} ${t("browse.lost") ? "" : ""}${items.length} items`;
+    resultsCount.textContent = `${items.length} ${t("browse.resultsCount")}`;
     
     items.forEach((item) => {
         const card = createCard(item);

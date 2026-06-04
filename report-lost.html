@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Report Lost Item - UKM Lost & Found</title>
+    <title>Lost Something? — UKM Lost & Found</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
@@ -13,7 +13,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
         <div class="container">
             <a class="navbar-brand fw-bold" href="index.html">
-                <i class="bi bi-search"></i> UKM Lost & Found
+                <i class="bi bi-suitcase-lg-fill"></i> UKM Lost & Found
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
                 <span class="navbar-toggler-icon"></span>
@@ -46,24 +46,55 @@
         </div>
     </nav>
 
-    <section class="py-5 bg-light">
+    <!-- 求助信 Banner -->
+    <section class="report-banner">
+        <div class="container">
+            <div class="row align-items-center g-3">
+                <div class="col-md-9 text-center text-md-start">
+                    <h1 data-i18n="reportLost.bannerTitle">Lost Something?</h1>
+                    <p class="report-quote" data-i18n="reportLost.bannerQuote">Don't worry — losing things happens to all of us. Tell us what you lost, and let's bring it home together. 💛</p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <svg class="report-banner-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <g opacity="0.95">
+                            <path d="M 100 60 C 70 25, 25 25, 25 70 C 25 115, 65 145, 100 180 C 135 145, 175 115, 175 70 C 175 25, 130 25, 100 60 Z"
+                                  fill="rgba(255,255,255,0.25)" stroke="#fff" stroke-width="3"/>
+                        </g>
+                        <g transform="translate(100 105)">
+                            <circle cx="0" cy="-15" r="22" fill="none" stroke="#fff" stroke-width="6"/>
+                            <circle cx="0" cy="-15" r="10" fill="#dc6b3c"/>
+                            <rect x="-4" y="7" width="8" height="35" fill="#fff"/>
+                            <rect x="4" y="25" width="10" height="6" fill="#fff"/>
+                            <rect x="4" y="35" width="7" height="6" fill="#fff"/>
+                        </g>
+                        <path d="M 45 130 C 41 125, 33 125, 33 130 C 33 135, 38 139, 45 145 C 52 139, 57 135, 57 130 C 57 125, 49 125, 45 130 Z"
+                              fill="#fff" opacity="0.8"/>
+                        <path d="M 160 50 C 156 45, 148 45, 148 50 C 148 55, 153 59, 160 65 C 167 59, 172 55, 172 50 C 172 45, 164 45, 160 50 Z"
+                              fill="#fff" opacity="0.7"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+
+    <!-- 全宽表单 -->
+    <section class="pb-5">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="card shadow-sm border-0">
-                        <div class="card-body p-4 p-md-5">
-                            <h2 class="mb-1"><i class="bi bi-exclamation-circle text-danger"></i> <span data-i18n="report.lostTitle">Report a Lost Item</span></h2>
-                            <p class="text-muted mb-4" data-i18n="report.lostSubtitle">Provide details about the item you lost. The more accurate, the better!</p>
-                            
-                            <div id="alertBox" class="alert d-none" role="alert"></div>
-                            
-                            <form id="reportForm">
-                                <div class="mb-3">
-                                    <label class="form-label"><span data-i18n="report.itemTitle">Item Title</span> <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="title" placeholder="e.g. Black iPhone 13 Pro" required>
-                                </div>
-                                
-                                <div class="mb-3">
+                <div class="col-lg-10">
+                    <div class="report-form-card">
+                        <div id="alertBox" class="alert d-none" role="alert"></div>
+
+                        <form id="reportForm">
+                            <div class="mb-3">
+                                <label class="form-label"><span data-i18n="report.itemTitle">Item Title</span> <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="title" placeholder="e.g. Black iPhone 13 Pro" required>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
                                     <label class="form-label"><span data-i18n="report.category">Category</span> <span class="text-danger">*</span></label>
                                     <select class="form-select" id="category" required>
                                         <option value="" data-i18n="report.selectCategory">-- Select category --</option>
@@ -77,43 +108,78 @@
                                         <option value="Other" data-i18n="cat.other">Other</option>
                                     </select>
                                 </div>
-                                
-                                <div class="mb-3">
-                                    <label class="form-label"><span data-i18n="report.description">Description</span> <span class="text-danger">*</span></label>
-                                    <textarea class="form-control" id="description" rows="4" placeholder="Color, brand, distinctive features, what's inside (for bags)..." required></textarea>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label"><span data-i18n="report.date">Date Lost</span> <span class="text-danger">*</span></label>
+                                    <input type="date" class="form-control" id="date" required>
                                 </div>
-                                
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label"><span data-i18n="report.location">Location</span> <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="location" placeholder="e.g. FTSM Library 2nd floor" required>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label"><span data-i18n="report.date">Date Lost</span> <span class="text-danger">*</span></label>
-                                        <input type="date" class="form-control" id="date" required>
-                                    </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label"><span data-i18n="report.description">Description</span> <span class="text-danger">*</span></label>
+                                <textarea class="form-control" id="description" rows="4" placeholder="Color, brand, distinctive features, what's inside (for bags)..." required></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label"><span data-i18n="report.location">Location</span> <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="location" placeholder="e.g. FTSM Library 2nd floor" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label" data-i18n="report.photo">Photo (optional)</label>
+                                <input type="file" class="form-control" id="photo" accept="image/*">
+                                <small class="text-muted" data-i18n="report.photoHint">A photo helps people identify your item. Max 5 MB.</small>
+                                <div class="mt-2">
+                                    <img id="photoPreview" class="img-fluid rounded d-none" style="max-height: 200px;">
                                 </div>
-                                
-                                <div class="mb-3">
-                                    <label class="form-label" data-i18n="report.photo">Photo (optional)</label>
-                                    <input type="file" class="form-control" id="photo" accept="image/*">
-                                    <small class="text-muted" data-i18n="report.photoHint">A photo helps people identify your item. Max 5 MB.</small>
-                                    <div class="mt-2">
-                                        <img id="photoPreview" class="img-fluid rounded d-none" style="max-height: 200px;">
-                                    </div>
-                                </div>
-                                
-                                <button type="submit" class="btn btn-danger btn-lg w-100" id="submitBtn">
-                                    <i class="bi bi-send"></i> <span data-i18n="report.submitBtn">Submit Report</span>
-                                </button>
-                            </form>
+                            </div>
+
+                            <button type="submit" class="btn btn-danger btn-lg w-100" id="submitBtn">
+                                <span data-i18n="reportLost.submitBtn">🙏 Help me find it</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+   
+    <!-- 表单下方:暖心贴士(看完表单收到的鼓励) -->
+    <section class="pb-5 pt-2">
+        <div class="container">
+          <p class="text-center text-muted mb-3" style="font-size: 0.9rem;" data-i18n="reportLost.tipsHeader">— 💛 A few gentle tips —</p>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="tip-card h-100">
+                        <span class="tip-icon">🎯</span>
+                        <div class="tip-text">
+                            <h6 data-i18n="reportLost.tip1Title">Be specific</h6>
+                            <p data-i18n="reportLost.tip1Desc">Color, brand, distinctive marks — every detail helps someone recognize your item.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="tip-card h-100">
+                        <span class="tip-icon">📸</span>
+                        <div class="tip-text">
+                            <h6 data-i18n="reportLost.tip2Title">Add a photo if you can</h6>
+                            <p data-i18n="reportLost.tip2Desc">Even an old photo from your camera roll makes matching far easier.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="tip-card h-100">
+                        <span class="tip-icon">🤝</span>
+                        <div class="tip-text">
+                            <h6 data-i18n="reportLost.tip3Title">Stay hopeful</h6>
+                            <p data-i18n="reportLost.tip3Desc">Many items get reunited within days. UKM students are kind.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="js/report.js"></script>
 </body>
 </html>

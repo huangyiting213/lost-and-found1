@@ -2,6 +2,7 @@ import { db } from "./firebase-config.js";
 import { setupNavbar, requireLogin } from "./auth-state.js";
 import { initLangToggle, t } from "./i18n.js";
 import { collection, query, where, getDocs, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { showConfirm, showToast } from "./modal.js";
 
 setupNavbar();
 initLangToggle();
@@ -87,14 +88,35 @@ function createPostCard(item) {
     `;
 
     col.querySelector(".toggle-resolve").addEventListener("click", async (e) => {
-        const id = e.target.dataset.id;
-        const current = e.target.dataset.status;
-        const newStatus = current === "resolved" ? "open" : "resolved";
+        const btn = e.target.closest(".toggle-resolve");
+        const id = btn.dataset.id;
+        const current = btn.dataset.status;
+        const isResolving = current !== "resolved";
+        const newStatus = isResolving ? "resolved" : "open";
+        
+        // 找到对应物品标题(从同卡片里取)
+        const card = btn.closest(".card");
+        const itemTitle = card.querySelector(".card-title")?.textContent || "";
+        
+        const ok = await showConfirm({
+            icon: isResolving ? "🎉" : "🔄",
+            iconType: isResolving ? "success" : "danger",
+            title: t(isResolving ? "modal.resolveTitle" : "modal.reopenTitle"),
+            detail: t(isResolving ? "modal.resolveDetail" : "modal.reopenDetail"),
+            itemName: itemTitle,
+            hint: t(isResolving ? "modal.resolveHint" : "modal.reopenHint"),
+            confirmText: t(isResolving ? "modal.resolve" : "modal.reopen"),
+            confirmClass: isResolving ? "btn-success" : "btn-primary",
+            cancelText: t("modal.cancel")
+        });
+        if (!ok) return;
+        
         try {
             await updateDoc(doc(db, "items", id), { status: newStatus });
-            location.reload();
+            showToast(t(isResolving ? "toast.resolved" : "toast.reopened"), "success");
+            setTimeout(() => location.reload(), 800);
         } catch (err) {
-            alert("Failed to update status: " + err.message);
+            showToast(t("toast.error") + ": " + err.message, "danger");
         }
     });
 
@@ -102,12 +124,26 @@ function createPostCard(item) {
         const btn = e.target.closest(".delete-post");
         const id = btn.dataset.id;
         const title = btn.dataset.title;
-        if (!confirm(`Delete "${title}"? This cannot be undone.`)) return;
+        
+        const ok = await showConfirm({
+            icon: "🗑️",
+            iconType: "danger",
+            title: t("modal.deleteTitle"),
+            detail: t("modal.deleteDetail"),
+            itemName: title,
+            hint: t("modal.deleteHint"),
+            confirmText: t("modal.delete"),
+            confirmClass: "btn-danger",
+            cancelText: t("modal.cancel")
+        });
+        if (!ok) return;
+        
         try {
             await deleteDoc(doc(db, "items", id));
-            location.reload();
+            showToast(t("toast.deleted"), "success");
+            setTimeout(() => location.reload(), 800);
         } catch (err) {
-            alert("Failed to delete: " + err.message);
+            showToast(t("toast.error") + ": " + err.message, "danger");
         }
     });
 
