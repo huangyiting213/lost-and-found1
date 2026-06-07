@@ -880,3 +880,364 @@ footer .text-muted {
 .tip-card h6 {
     font-size: 1rem;
 }
+/* ============================================
+   Item Detail 页主题:"物品档案卡"
+   ============================================ */
+
+/* 物品图片大图区:暖色边框 + 圆角 */
+#imageContainer {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: linear-gradient(135deg, #fef3e6 0%, #fff8ef 100%);
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--soft-shadow);
+}
+
+#imageContainer img {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    object-fit: contain;
+}
+
+#imageContainer .no-image-placeholder {
+    color: var(--text-muted);
+    text-align: center;
+    padding: 60px 20px;
+}
+
+#imageContainer .no-image-placeholder i {
+    font-size: 4rem;
+    color: var(--primary-light);
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* 物品信息卡 */
+#itemDetail .card {
+    border: 1px solid rgba(217, 119, 6, 0.1);
+    border-radius: var(--radius-lg);
+}
+
+#itemTitle {
+    color: var(--accent);
+    font-weight: 800;
+    font-size: 2rem;
+    margin-bottom: 0.8rem;
+}
+
+#itemDetail .card-body p strong {
+    color: var(--accent);
+    font-weight: 700;
+    margin-right: 4px;
+}
+
+#itemDetail .card-body p i.bi {
+    color: var(--primary);
+    margin-right: 4px;
+}
+
+#itemDescription {
+    color: var(--text-dark);
+    font-size: 1.02rem;
+    line-height: 1.7;
+    background: #fff8ef;
+    padding: 14px 18px;
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--primary-light);
+}
+
+/* 联系按钮 */
+#contactBtn {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    border: none;
+    padding: 14px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 14px rgba(217, 119, 6, 0.25);
+    transition: all 0.3s ease;
+}
+
+#contactBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(217, 119, 6, 0.35);
+}
+
+/* 联系信息暖色卡 */
+#contactInfo.alert-info {
+    background: #fff8ef;
+    border: 1px solid #f3d9b1;
+    border-radius: var(--radius-md);
+    color: var(--text-dark);
+    padding: 18px;
+}
+
+#contactInfo h6 {
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+#contactInfo strong {
+    color: var(--accent);
+    margin-right: 6px;
+}
+
+#contactInfo .btn-success {
+    background: linear-gradient(135deg, #65a30d 0%, #4d7c0f 100%);
+    border: none;
+    box-shadow: 0 3px 10px rgba(101, 163, 13, 0.25);
+}
+
+/* AI 匹配区:特别金色边框 + 闪光感 */
+#aiMatchSection .card {
+    background: linear-gradient(135deg, #fffbf0 0%, #fff8ef 100%);
+    border: 2px solid #fbbf24 !important;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 24px rgba(251, 191, 36, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+#aiMatchSection .card::before {
+    content: "";
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 120px; height: 120px;
+    background: radial-gradient(circle, rgba(251, 191, 36, 0.25) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+#aiMatchSection h4 {
+    color: var(--accent);
+    font-weight: 800;
+}
+
+#aiMatchSection h4 .bi-stars {
+    color: #f59e0b;
+    animation: shimmer 2.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.15); }
+}
+
+#aiLoading {
+    background: rgba(251, 191, 36, 0.08);
+    border-radius: var(--radius-md);
+    padding: 30px;
+}
+
+#aiLoading .spinner-border {
+    color: var(--primary) !important;
+}
+
+#aiNoMatch {
+    background: #fff8ef;
+    border-radius: var(--radius-md);
+    padding: 20px;
+}
+
+/* AI 匹配卡片 */
+.match-card {
+    border-left: 4px solid var(--primary-light);
+    transition: all 0.25s ease;
+}
+
+.match-card:hover {
+    transform: translateX(4px);
+    box-shadow: 0 6px 18px rgba(217, 119, 6, 0.15);
+}
+
+/* 返回按钮 */
+a[href="browse.html"].text-decoration-none {
+    color: var(--accent);
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+a[href="browse.html"].text-decoration-none:hover {
+    color: var(--primary);
+    transform: translateX(-4px);
+}
+
+/* Status Badge(已解决标识)加亮 */
+#statusBadge:not(:empty) {
+    margin-left: 6px;
+}
+/* ============================================
+   Admin 页主题:"控制中心"
+   ============================================ */
+
+.admin-header {
+    background: linear-gradient(135deg, #78350f 0%, #92400e 100%);
+    color: #fff;
+    padding: 32px 0 28px;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.admin-header::before {
+    content: "";
+    position: absolute;
+    top: -40px; right: -30px;
+    width: 160px; height: 160px;
+    background: rgba(251, 191, 36, 0.15);
+    border-radius: 50%;
+}
+
+.admin-header h2 {
+    color: #fff;
+    font-weight: 800;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.admin-header .admin-subtitle {
+    color: #fde6c4;
+    font-size: 0.95rem;
+    margin-top: 4px;
+    position: relative;
+    z-index: 1;
+}
+
+.admin-header .badge.bg-warning {
+    background: var(--primary-light) !important;
+    color: var(--accent);
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 999px;
+}
+
+/* 统计卡片(管理员看板) */
+.admin-stat-card {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    padding: 22px 24px;
+    border: 1px solid rgba(217, 119, 6, 0.1);
+    box-shadow: var(--soft-shadow);
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.admin-stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--hover-shadow);
+}
+
+.admin-stat-card .stat-emoji {
+    font-size: 2.4rem;
+    flex-shrink: 0;
+    width: 60px; height: 60px;
+    background: linear-gradient(135deg, #fef3e6 0%, #fde6c4 100%);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-stat-card .stat-content {
+    flex: 1;
+}
+
+.admin-stat-card .stat-num {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+}
+
+.admin-stat-card .stat-label {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: 4px;
+}
+
+/* 表格美化 */
+#itemsTable {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--soft-shadow);
+}
+
+#itemsTable thead {
+    background: #fef3e6;
+}
+
+#itemsTable thead th {
+    color: var(--accent);
+    font-weight: 700;
+    border: none;
+    padding: 14px 16px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#itemsTable tbody td {
+    padding: 14px 16px;
+    vertical-align: middle;
+    border-color: #f3d9b1;
+}
+
+#itemsTable tbody tr {
+    transition: background 0.2s ease;
+}
+
+#itemsTable tbody tr:hover {
+    background: #fff8ef;
+}
+
+#itemsTable .btn-danger.btn-sm {
+    border-radius: var(--radius-sm);
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Access Denied 拒访页 */
+#accessDenied {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    padding: 60px 40px;
+    box-shadow: var(--soft-shadow);
+    border: 2px solid #fecaca;
+}
+
+#accessDenied i.bi {
+    color: #dc6b3c !important;
+}
+
+#accessDenied h3 {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+/* Section 标题 */
+.admin-section-title {
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.admin-section-title::before {
+    content: "";
+    width: 4px;
+    height: 22px;
+    background: linear-gradient(180deg, var(--primary-light) 0%, var(--primary) 100%);
+    border-radius: 2px;
+}

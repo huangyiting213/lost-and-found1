@@ -2,6 +2,7 @@ import { auth, db } from "./firebase-config.js";
 import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { collection, getDocs, doc, getDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { initLangToggle, t } from "./i18n.js";
+import { showConfirm, showToast } from "./modal.js";
 
 initLangToggle();
 
@@ -81,20 +82,33 @@ async function loadItems() {
         tbody.appendChild(tr);
     });
 
-    tbody.querySelectorAll(".del-item").forEach((btn) => {
+   tbody.querySelectorAll(".del-item").forEach((btn) => {
         btn.addEventListener("click", async () => {
             const id = btn.dataset.id;
             const title = btn.dataset.title;
-            if (!confirm(`Delete "${title}"? This is permanent.`)) return;
+            
+            const ok = await showConfirm({
+                icon: "🗑️",
+                iconType: "danger",
+                title: t("modal.deleteTitle"),
+                detail: t("modal.deleteDetail"),
+                itemName: title,
+                hint: t("modal.deleteHint"),
+                confirmText: t("modal.delete"),
+                confirmClass: "btn-danger",
+                cancelText: t("modal.cancel")
+            });
+            if (!ok) return;
+            
             try {
                 await deleteDoc(doc(db, "items", id));
+                showToast(t("toast.deleted"), "success");
                 loadItems();
             } catch (err) {
-                alert("Failed to delete: " + err.message);
+                showToast(t("toast.error") + ": " + err.message, "danger");
             }
         });
     });
-}
 
 async function loadUsers() {
     const snapshot = await getDocs(collection(db, "users"));
@@ -120,4 +134,5 @@ async function loadUsers() {
         `;
         tbody.appendChild(tr);
     });
+}
 }

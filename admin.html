@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - UKM Lost & Found</title>
+    <title>Control Center — UKM Lost & Found Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
@@ -13,7 +13,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container">
             <a class="navbar-brand fw-bold" href="index.html">
-                <i class="bi bi-shield-lock"></i> UKM Lost & Found — Admin
+                <i class="bi bi-shield-lock-fill"></i> UKM Lost & Found — Admin
             </a>
             <div class="ms-auto d-flex align-items-center gap-2">
                 <button class="btn btn-outline-light btn-sm" id="langToggle" type="button">中文</button>
@@ -28,94 +28,111 @@
         <p class="mt-2 text-muted" data-i18n="admin.verifying">Verifying access...</p>
     </div>
 
-    <div id="accessDenied" class="container text-center py-5 d-none">
-        <i class="bi bi-shield-x text-danger" style="font-size: 4rem;"></i>
-        <h3 class="mt-3" data-i18n="admin.accessDenied">Access Denied</h3>
-        <p class="text-muted" data-i18n="admin.noPermission">You do not have permission to view this page.</p>
-        <a href="index.html" class="btn btn-primary" data-i18n="admin.backHome">Back to Home</a>
+    <div id="accessDenied" class="container py-5 d-none">
+        <div class="text-center" style="max-width: 480px; margin: 0 auto;">
+            <i class="bi bi-shield-x" style="font-size: 4rem;"></i>
+            <h3 class="mt-3" data-i18n="admin.accessDenied">Access Denied</h3>
+            <p class="text-muted" data-i18n="admin.noPermission">You do not have permission to view this page.</p>
+            <a href="index.html" class="btn btn-primary" data-i18n="admin.backHome">Back to Home</a>
+        </div>
     </div>
 
-    <div id="adminContent" class="container py-4 d-none">
-        <h1 class="mb-4" data-i18n="admin.dashboard">Admin Dashboard</h1>
+    <div id="adminContent" class="d-none">
+        <!-- 控制中心 Header -->
+        <section class="admin-header">
+            <div class="container d-flex justify-content-between align-items-center flex-wrap gap-3">
+                <div>
+                    <h2 data-i18n="admin.title">Control Center</h2>
+                    <p class="admin-subtitle mb-0" data-i18n="admin.subtitle">Manage all posts and users from here</p>
+                </div>
+                <span class="badge bg-warning"><i class="bi bi-shield-fill-check"></i> Admin</span>
+            </div>
+        </section>
 
-        <div class="row g-3 mb-4">
-            <div class="col-6 col-md-3">
-                <div class="card text-center shadow-sm border-0">
-                    <div class="card-body">
-                        <i class="bi bi-box-seam text-primary fs-2"></i>
-                        <h3 class="mt-2 mb-0" id="statTotal">0</h3>
-                        <small class="text-muted" data-i18n="admin.totalItems">Total Items</small>
+        <div class="container pb-5">
+            <!-- 总览 -->
+            <h5 class="admin-section-title" data-i18n="admin.statsSection">📊 Overview</h5>
+            <div class="row g-3 mb-4">
+                <div class="col-6 col-md-3">
+                    <div class="admin-stat-card">
+                        <div class="stat-emoji">📦</div>
+                        <div class="stat-content">
+                            <div class="stat-num" id="statTotal">0</div>
+                            <div class="stat-label" data-i18n="admin.totalItems">Total Items</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="admin-stat-card">
+                        <div class="stat-emoji">😟</div>
+                        <div class="stat-content">
+                            <div class="stat-num" id="statLost">0</div>
+                            <div class="stat-label" data-i18n="admin.lostItems">Lost Items</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="admin-stat-card">
+                        <div class="stat-emoji">🎁</div>
+                        <div class="stat-content">
+                            <div class="stat-num" id="statFound">0</div>
+                            <div class="stat-label" data-i18n="admin.foundItems">Found Items</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="admin-stat-card">
+                        <div class="stat-emoji">👥</div>
+                        <div class="stat-content">
+                            <div class="stat-num" id="statUsers">0</div>
+                            <div class="stat-label" data-i18n="admin.users">Users</div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-6 col-md-3">
-                <div class="card text-center shadow-sm border-0">
-                    <div class="card-body">
-                        <i class="bi bi-exclamation-circle text-danger fs-2"></i>
-                        <h3 class="mt-2 mb-0" id="statLost">0</h3>
-                        <small class="text-muted" data-i18n="admin.lostItems">Lost Items</small>
+
+            <!-- Tab 区 -->
+            <h5 class="admin-section-title" data-i18n="admin.itemsSection">📋 Management</h5>
+            <ul class="nav nav-tabs mb-3" role="tablist">
+                <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#itemsTab" data-i18n="admin.tabItems">All Items</button></li>
+                <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#usersTab" data-i18n="admin.tabUsers">All Users</button></li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="itemsTab">
+                    <div class="table-responsive">
+                        <table class="table align-middle" id="itemsTable">
+                            <thead>
+                                <tr>
+                                    <th data-i18n="admin.colType">Type</th>
+                                    <th data-i18n="admin.colTitle">Title</th>
+                                    <th data-i18n="admin.colCategory">Category</th>
+                                    <th data-i18n="admin.colLocation">Location</th>
+                                    <th data-i18n="admin.colPostedBy">Posted By</th>
+                                    <th data-i18n="admin.colStatus">Status</th>
+                                    <th data-i18n="admin.colAction">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="itemsTableBody"></tbody>
+                        </table>
                     </div>
                 </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="card text-center shadow-sm border-0">
-                    <div class="card-body">
-                        <i class="bi bi-check-circle text-success fs-2"></i>
-                        <h3 class="mt-2 mb-0" id="statFound">0</h3>
-                        <small class="text-muted" data-i18n="admin.foundItems">Found Items</small>
+
+                <div class="tab-pane fade" id="usersTab">
+                    <div class="table-responsive">
+                        <table class="table align-middle" id="itemsTable">
+                            <thead>
+                                <tr>
+                                    <th data-i18n="admin.colName">Name</th>
+                                    <th data-i18n="admin.colMatric">Matric ID</th>
+                                    <th data-i18n="admin.colEmail">Email</th>
+                                    <th data-i18n="admin.colPhone">Phone</th>
+                                    <th data-i18n="admin.colRole">Role</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTableBody"></tbody>
+                        </table>
                     </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="card text-center shadow-sm border-0">
-                    <div class="card-body">
-                        <i class="bi bi-people text-info fs-2"></i>
-                        <h3 class="mt-2 mb-0" id="statUsers">0</h3>
-                        <small class="text-muted" data-i18n="admin.users">Users</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <ul class="nav nav-tabs mb-3" role="tablist">
-            <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#itemsTab" data-i18n="admin.tabItems">All Items</button></li>
-            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#usersTab" data-i18n="admin.tabUsers">All Users</button></li>
-        </ul>
-
-        <div class="tab-content">
-            <div class="tab-pane fade show active" id="itemsTab">
-                <div class="table-responsive">
-                    <table class="table table-hover align-middle bg-white shadow-sm">
-                        <thead class="table-light">
-                            <tr>
-                                <th data-i18n="admin.colType">Type</th>
-                                <th data-i18n="admin.colTitle">Title</th>
-                                <th data-i18n="admin.colCategory">Category</th>
-                                <th data-i18n="admin.colLocation">Location</th>
-                                <th data-i18n="admin.colPostedBy">Posted By</th>
-                                <th data-i18n="admin.colStatus">Status</th>
-                                <th data-i18n="admin.colAction">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="itemsTableBody"></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="tab-pane fade" id="usersTab">
-                <div class="table-responsive">
-                    <table class="table table-hover align-middle bg-white shadow-sm">
-                        <thead class="table-light">
-                            <tr>
-                                <th data-i18n="admin.colName">Name</th>
-                                <th data-i18n="admin.colMatric">Matric ID</th>
-                                <th data-i18n="admin.colEmail">Email</th>
-                                <th data-i18n="admin.colPhone">Phone</th>
-                                <th data-i18n="admin.colRole">Role</th>
-                            </tr>
-                        </thead>
-                        <tbody id="usersTableBody"></tbody>
-                    </table>
                 </div>
             </div>
         </div>

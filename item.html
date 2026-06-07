@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Item Details - UKM Lost & Found</title>
+    <title>Item Details — UKM Lost & Found</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
@@ -13,7 +13,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
         <div class="container">
             <a class="navbar-brand fw-bold" href="index.html">
-                <i class="bi bi-search"></i> UKM Lost & Found
+                <i class="bi bi-suitcase-lg-fill"></i> UKM Lost & Found
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
                 <span class="navbar-toggler-icon"></span>
@@ -46,9 +46,9 @@
         </div>
     </nav>
 
-    <section class="py-4 bg-light min-vh-100">
+    <section class="py-4 min-vh-100">
         <div class="container">
-            <a href="browse.html" class="btn btn-link text-decoration-none mb-3 px-0">
+            <a href="browse.html" class="text-decoration-none mb-3 d-inline-block">
                 <i class="bi bi-arrow-left"></i> <span data-i18n="item.back">Back to Browse</span>
             </a>
 
@@ -65,7 +65,7 @@
             <div id="itemDetail" class="d-none">
                 <div class="row g-4">
                     <div class="col-lg-6">
-                        <div id="imageContainer" class="bg-white rounded shadow-sm overflow-hidden"></div>
+                        <div id="imageContainer"></div>
                     </div>
                     <div class="col-lg-6">
                         <div class="card border-0 shadow-sm h-100">
@@ -77,14 +77,15 @@
                                 </div>
                                 <h2 id="itemTitle" class="mb-3"></h2>
                                 <div class="mb-3">
-                                    <p class="mb-2"><i class="bi bi-geo-alt-fill text-primary"></i> <strong data-i18n="item.location">Location:</strong> <span id="itemLocation"></span></p>
-                                    <p class="mb-2"><i class="bi bi-calendar-event-fill text-primary"></i> <strong data-i18n="item.date">Date:</strong> <span id="itemDate"></span></p>
-                                    <p class="mb-2"><i class="bi bi-person-fill text-primary"></i> <strong data-i18n="item.postedBy">Posted by:</strong> <span id="itemPoster"></span></p>
+                                    <p class="mb-2"><i class="bi bi-geo-alt-fill"></i> <strong data-i18n="item.location">Location:</strong> <span id="itemLocation"></span></p>
+                                    <p class="mb-2"><i class="bi bi-calendar-event-fill"></i> <strong data-i18n="item.date">Date:</strong> <span id="itemDate"></span></p>
+                                    <p class="mb-2"><i class="bi bi-person-fill"></i> <strong data-i18n="item.postedBy">Posted by:</strong> <span id="itemPoster"></span></p>
                                 </div>
                                 <hr>
                                 <h5 data-i18n="item.description">Description</h5>
-                                <p id="itemDescription" class="text-muted"></p>
+                                <p id="itemDescription"></p>
                                 <hr>
+                                <p class="text-muted small mb-2" data-i18n="item.contactHint">💌 Get in touch to arrange pickup or hand-over</p>
                                 <button id="contactBtn" class="btn btn-primary btn-lg w-100">
                                     <i class="bi bi-envelope-fill"></i> <span data-i18n="item.contactBtn">Contact Poster</span>
                                 </button>
@@ -101,19 +102,20 @@
                     </div>
                 </div>
 
+                <!-- AI 匹配区:金色边框 + 特别质感 -->
                 <div id="aiMatchSection" class="mt-5 d-none">
-                    <div class="card border-0 shadow-sm">
+                    <div class="card border-0">
                         <div class="card-body p-4">
                             <h4 class="mb-1">
-                                <i class="bi bi-stars text-warning"></i> <span data-i18n="item.aiTitle">AI Smart Matches</span>
+                                <i class="bi bi-stars"></i> <span data-i18n="item.aiTitle">AI Smart Matches</span>
                             </h4>
                             <p class="text-muted small mb-4" data-i18n="item.aiSubtitle">Our AI analyzed this item and found these potential matches from the opposite category.</p>
                             <div id="aiLoading" class="text-center py-4">
-                                <div class="spinner-border text-warning" role="status"></div>
+                                <div class="spinner-border" role="status"></div>
                                 <p class="mt-2 text-muted small" data-i18n="item.aiAnalyzing">AI is analyzing potential matches...</p>
                             </div>
                             <div id="aiResults" class="row g-3"></div>
-                            <div id="aiNoMatch" class="text-center py-3 text-muted d-none">
+                            <div id="aiNoMatch" class="text-center text-muted d-none">
                                 <p class="mb-0" data-i18n="item.aiNoMatch">No strong matches found yet. Check back later as new items are posted.</p>
                             </div>
                         </div>

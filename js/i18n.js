@@ -148,6 +148,7 @@ const translations = {
         "item.aiAnalyzing": "AI is analyzing potential matches...",
         "item.aiNoMatch": "No strong matches found yet. Check back later as new items are posted.",
         "item.match": "match",
+        "item.contactHint": "💌 Get in touch to arrange pickup or hand-over",
 
         "myposts.title": "My Posts",
         "myposts.empty": "You haven't posted anything yet",
@@ -201,7 +202,15 @@ const translations = {
         "toast.resolved": "Marked as resolved 🎉",
         "toast.reopened": "Post is back online",
         "toast.error": "Something went wrong, please try again",
-
+        "admin.title": "Control Center",
+        "admin.subtitle": "Manage all posts and users from here",
+        "admin.statsSection": "📊 Overview",
+        "admin.itemsSection": "📋 All Items",
+        "admin.totalItems": "Total Items",
+        "admin.openItems": "Open",
+        "admin.resolvedItems": "Reunited",
+        "admin.totalUsers": "Users"
+                                
     },
     zh: {
         "nav.home": "首页",
@@ -352,6 +361,7 @@ const translations = {
         "item.aiAnalyzing": "AI 正在分析潜在匹配……",
         "item.aiNoMatch": "暂未找到强匹配。随着新物品发布,稍后再来看看。",
         "item.match": "匹配度",
+        "item.contactHint": "💌 请联系对方安排归还或领取",
 
         "myposts.title": "我的发布",
         "myposts.empty": "你还没有发布任何物品",
@@ -404,7 +414,15 @@ const translations = {
         "toast.deleted": "发布已删除",
         "toast.resolved": "已标记为已解决 🎉",
         "toast.reopened": "发布已重新上线",
-        "toast.error": "出错了,请重试"
+        "toast.error": "出错了,请重试",
+        "admin.title": "控制中心",
+        "admin.subtitle": "在此管理所有发布和用户",
+        "admin.statsSection": "📊 总览",
+        "admin.itemsSection": "📋 所有物品",
+        "admin.totalItems": "物品总数",
+        "admin.openItems": "进行中",
+        "admin.resolvedItems": "已团聚",
+        "admin.totalUsers": "用户数"
     }
 };
 
