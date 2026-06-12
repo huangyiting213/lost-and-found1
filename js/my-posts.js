@@ -77,6 +77,7 @@ function createPostCard(item) {
             </div>
             <div class="card-footer bg-white border-0 d-flex gap-2">
                 <a href="item.html?id=${item.id}" class="btn btn-sm btn-outline-primary flex-fill">${t("myposts.view")}</a>
+                <a href="edit-item.html?id=${item.id}" class="btn btn-sm btn-outline-secondary flex-fill">${t("myposts.edit")}</a>
                 <button class="btn btn-sm btn-outline-success flex-fill toggle-resolve" data-id="${item.id}" data-status="${item.status}">
                     ${isResolved ? t("myposts.reopen") : t("myposts.markResolved")}
                 </button>

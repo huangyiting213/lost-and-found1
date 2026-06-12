@@ -141,4 +141,10 @@ filterType.addEventListener("change", applyFilters);
 filterCategory.addEventListener("change", applyFilters);
 filterSort.addEventListener("change", applyFilters);
 
+// ===== 接收从首页传来的搜索关键词 =====
+const initialQuery = new URLSearchParams(window.location.search).get("q");
+if (initialQuery) {
+    searchInput.value = initialQuery;
+}
+
 loadItems();

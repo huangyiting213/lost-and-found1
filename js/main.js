@@ -78,10 +78,10 @@ async function loadHomeStats() {
     const elResolved = document.getElementById("statResolved");
     const elUsers = document.getElementById("statUsers");
 
-    if (!elTotal && !elResolved && !elUsers) return; // 不在首页就跳过
+    if (!elTotal && !elResolved && !elUsers) return; 
 
     try {
-        // 读 items 集合
+        
         const itemsSnap = await getDocs(collection(db, "items"));
         let total = 0, resolved = 0;
         itemsSnap.forEach(doc => {
@@ -89,17 +89,17 @@ async function loadHomeStats() {
             if (doc.data().status === "resolved") resolved++;
         });
 
-        // 读 users 集合
+        
         const usersSnap = await getDocs(collection(db, "users"));
         const users = usersSnap.size;
 
-        // 动画式数字显示(从 0 数到真实数,显得专业)
+        
         animateNumber(elTotal, total);
         animateNumber(elResolved, resolved);
         animateNumber(elUsers, users);
     } catch (error) {
         console.error("Failed to load home stats:", error);
-        // 失败就不显示,保持 "—",不影响其他功能
+        
     }
 }
 
@@ -120,6 +120,22 @@ function animateNumber(el, target) {
             el.textContent = Math.floor(current);
         }
     }, duration / steps);
+}
+
+// ===== 首页搜索框 → 跳到 browse 页并带上关键词 =====
+const homeSearchInput = document.getElementById("homeSearchInput");
+const homeSearchBtn = document.getElementById("homeSearchBtn");
+
+function goToBrowseSearch() {
+    const keyword = homeSearchInput.value.trim();
+    window.location.href = "browse.html?q=" + encodeURIComponent(keyword);
+}
+
+if (homeSearchBtn) homeSearchBtn.addEventListener("click", goToBrowseSearch);
+if (homeSearchInput) {
+    homeSearchInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") goToBrowseSearch();  // 回车也能搜
+    });
 }
 
 loadHomeStats();

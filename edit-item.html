@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Post — UKM Lost & Found</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="bi bi-suitcase-lg-fill"></i> UKM Lost &amp; Found
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarMenu">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html" data-i18n="nav.home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="browse.html" data-i18n="nav.browse">Browse Items</a></li>
+                    <li class="nav-item"><a class="nav-link" href="report-lost.html" data-i18n="nav.reportLost">Report Lost</a></li>
+                    <li class="nav-item"><a class="nav-link" href="report-found.html" data-i18n="nav.reportFound">Report Found</a></li>
+                    <li class="nav-item">
+                        <button class="btn btn-sm btn-outline-light ms-lg-2" id="langToggle" type="button">中文</button>
+                    </li>
+                    <li class="nav-item d-none" id="guestMenu">
+                        <a class="nav-link btn btn-warning text-dark px-3 ms-lg-2" href="login.html" data-i18n="nav.login">Login</a>
+                    </li>
+                    <li class="nav-item dropdown d-none" id="userMenu">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-circle"></i> <span id="userNameDisplay">User</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="my-posts.html" data-i18n="nav.myPosts">My Posts</a></li>
+                            <li><a class="dropdown-item" href="profile.html" data-i18n="nav.profile">My Profile</a></li>
+                            <li><a class="dropdown-item d-none" href="admin.html" id="adminLink" data-i18n="nav.admin">Admin Panel</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" id="logoutBtn" data-i18n="nav.logout">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5" style="max-width: 680px;">
+        <a href="my-posts.html" class="btn btn-sm btn-outline-secondary mb-3">
+            <i class="bi bi-arrow-left"></i> <span data-i18n="edit.back">Back to My Posts</span>
+        </a>
+        <div class="mb-4">
+            <h2 data-i18n="edit.title">Edit Post</h2>
+            <p class="text-muted" data-i18n="edit.subtitle">Update the details of your post</p>
+        </div>
+
+        <div id="loadingSpinner" class="text-center py-5">
+            <div class="spinner-border text-primary"></div>
+        </div>
+
+        <div id="errorState" class="alert alert-danger d-none" data-i18n="edit.notAllowed">
+            You can't edit this post (it may not exist or isn't yours).
+        </div>
+
+        <div id="editCard" class="card shadow-sm d-none">
+            <div class="card-body p-4">
+                <div id="alertBox" class="alert d-none"></div>
+                <form id="editForm">
+                    <div class="mb-3">
+                        <label class="form-label" data-i18n="edit.type">Type</label>
+                        <div id="typeBadge"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="title" class="form-label" data-i18n="report.itemTitle">Item Title</label>
+                        <input type="text" class="form-control" id="title" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="form-label" data-i18n="report.category">Category</label>
+                        <select class="form-select" id="category" required>
+                            <option value="" data-i18n="report.selectCategory">-- Select category --</option>
+                            <option value="Electronics" data-i18n="cat.electronics">Electronics</option>
+                            <option value="ID &amp; Cards" data-i18n="cat.idCards">ID &amp; Cards</option>
+                            <option value="Bags &amp; Wallets" data-i18n="cat.bags">Bags &amp; Wallets</option>
+                            <option value="Keys" data-i18n="cat.keys">Keys</option>
+                            <option value="Clothing" data-i18n="cat.clothing">Clothing &amp; Accessories</option>
+                            <option value="Books" data-i18n="cat.books">Books &amp; Stationery</option>
+                            <option value="Jewelry" data-i18n="cat.jewelry">Jewelry &amp; Watches</option>
+                            <option value="Other" data-i18n="cat.other">Other</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label" data-i18n="report.description">Description</label>
+                        <textarea class="form-control" id="description" rows="4" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="location" class="form-label" data-i18n="report.location">Location</label>
+                        <input type="text" class="form-control" id="location" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="date" class="form-label" data-i18n="report.date">Date</label>
+                        <input type="date" class="form-control" id="date">
+                    </div>
+                    <div class="mb-4">
+                        <label for="photo" class="form-label" data-i18n="edit.photo">Photo</label>
+                        <div class="mb-2">
+                            <img id="photoPreview" src="" alt="" class="img-fluid rounded d-none" style="max-height: 220px;">
+                        </div>
+                        <input type="file" class="form-control" id="photo" accept="image/*">
+                        <small class="text-muted" data-i18n="edit.photoHint">Leave empty to keep the current photo. Max 5 MB.</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100" id="saveBtn">
+                        <i class="bi bi-check-lg"></i> <span data-i18n="edit.save">Save Changes</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="js/edit-item.js"></script>
+</body>
+</html>
