@@ -42,8 +42,19 @@ onAuthStateChanged(auth, async (user) => {
 });
 
 async function loadDashboard() {
-    await loadItems();
-    await loadUsers();
+    const results = await Promise.allSettled([
+        loadItems(),
+        loadUsers()
+    ]);
+
+    if (results[0].status === "rejected") {
+        console.error("loadItems failed:", results[0].reason);
+    }
+
+    if (results[1].status === "rejected") {
+        console.error("loadUsers failed:", results[1].reason);
+        showToast("Failed to load users: " + results[1].reason.message, "danger");
+    }
 }
 
 async function loadItems() {
@@ -110,21 +121,57 @@ async function loadItems() {
         });
     });
 
-async function loadUsers() {
-    const snapshot = await getDocs(collection(db, "users"));
-    const users = [];
-    snapshot.forEach((d) => users.push({ id: d.id, ...d.data() }));
+}
 
-    document.getElementById("statUsers").textContent = users.length;
+async function loadUsers() {
+    console.log("✅ loadUsers started");
 
     const tbody = document.getElementById("usersTableBody");
+    const statUsers = document.getElementById("statUsers");
+
+    console.log("usersTableBody:", tbody);
+    console.log("statUsers:", statUsers);
+
+    if (!tbody || !statUsers) {
+        throw new Error("Users table HTML element not found");
+    }
+
+    const snapshot = await getDocs(collection(db, "users"));
+
+    console.log("✅ Users snapshot size:", snapshot.size);
+
+    const users = [];
+
+    snapshot.forEach((userDoc) => {
+        console.log("User:", userDoc.id, userDoc.data());
+
+        users.push({
+            id: userDoc.id,
+            ...userDoc.data()
+        });
+    });
+
+    statUsers.textContent = snapshot.size;
     tbody.innerHTML = "";
+
+    if (snapshot.empty) {
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="5" class="text-center text-muted">
+                    No users found
+                </td>
+            </tr>
+        `;
+        return;
+    }
 
     users.forEach((u) => {
         const tr = document.createElement("tr");
+
         const roleBadge = u.role === "admin"
             ? '<span class="badge bg-warning text-dark">Admin</span>'
             : '<span class="badge bg-secondary">Student</span>';
+
         tr.innerHTML = `
             <td>${escapeHtml(u.fullName || "—")}</td>
             <td>${escapeHtml(u.matricId || "—")}</td>
@@ -132,7 +179,7 @@ async function loadUsers() {
             <td>${escapeHtml(u.phone || "—")}</td>
             <td>${roleBadge}</td>
         `;
+
         tbody.appendChild(tr);
     });
-}
 }
